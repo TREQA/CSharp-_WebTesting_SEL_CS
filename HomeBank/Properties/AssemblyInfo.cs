@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("INGHomeBank")]
+[assembly: AssemblyTitle("HomeBank")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("INGHomeBank")]
+[assembly: AssemblyProduct("HomeBank")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e45e62f4-985f-42f7-a1f8-c9a5719b6618")]
+[assembly: Guid("e9d7d947-f8a0-4c0d-be17-a6af80393f69")]
 
 // Version information for an assembly consists of the following four values:
 //
