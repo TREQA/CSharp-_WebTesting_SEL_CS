@@ -18,7 +18,7 @@ namespace tests
             homepage.GoTo();
             homepage.UserInput("test");
             homepage.PasswordInput("test");
-            Assert.AreEqual("Codul de Utilizator / Codul introduse nu sunt corecte!", homepage.ErrorCheck());
+            Assert.AreEqual("Codul de Utilizator/Codul introduse nu sunt corecte!", homepage.ErrorCheck());
         }
 
         [TestCleanup]
