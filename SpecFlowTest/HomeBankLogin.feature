@@ -1,4 +1,5 @@
-﻿Feature: IngHomeBankFeature
+﻿Feature: Login Feature
+
 	In order to check my ING card funds
 	As a normal human being
 	I want to login into ING HomeBank site
