@@ -4,61 +4,69 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace HomeBank
 {
     public class HomePage
     {
-        string Url = "https://www.homebank.ro";
-        private string pageTitle = "ING Home'Bank - Login";
-        private string loginButtonCssSelector = "div.submitLogin > input";
-        private string error1ID = "errorDiv1";
-        private string error2ID = "errorDiv";
-        private string passwordID = "password";
-        private string usernameID = "username";
+        private IWebDriver webDriver = new ChromeDriver();
 
-        Browser browser = new Browser();
+        internal string Url = "https://www.homebank.ro";
+        internal string pageTitle = "ING Home'Bank - Login";
+        internal string loginButtonCssSelector = "div.submitLogin > input";
+        internal string error1ID = "errorDiv1";
+        internal string error2ID = "errorDiv";
+        internal string passwordID = "password";
+        internal string usernameID = "username";
 
         public void GoTo()
         {
-            browser.GoTo(Url);
-            browser.MaximizeWindow();
+            webDriver.Url = Url;
+            webDriver.Manage().Window.Maximize();
         }
 
         public bool IsAt()
         {
-            return browser.Title == pageTitle;
+            return webDriver.Title == pageTitle;
         }
 
         public void UserInput(string user)
         {
-            browser.Input(usernameID, user);
+            IWebElement element = webDriver.FindElement(By.Id(usernameID));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.SendKeys(user);
         }
 
         public void PasswordInput(string password)
         {
-            browser.Input(passwordID, password);
+            IWebElement element = webDriver.FindElement(By.Id(passwordID));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.SendKeys(password);
         }
 
         public void Login()
         {
-            browser.Click(loginButtonCssSelector);
+            IWebElement element = webDriver.FindElement(By.CssSelector(loginButtonCssSelector));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.Click();
         }
 
         public string ErrorCheck1()
         {
-            return browser.ErrorCheck(error1ID);
+            return webDriver.FindElement(By.Id(error1ID)).Text;
         }
 
         public string ErrorCheck2()
         {
-            string first = new StringReader(browser.ErrorCheck(error2ID)).ReadLine();
+            string first = new StringReader(webDriver.FindElement(By.Id(error2ID)).Text).ReadLine();
             return first;
-        }
+        } 
 
         public void Close()
         {
-            browser.Close();
+            webDriver.Dispose();
         }
     }
 }
