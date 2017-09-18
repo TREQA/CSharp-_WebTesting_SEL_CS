@@ -8,42 +8,48 @@ using OpenQA.Selenium.Chrome;
 
 namespace HomeBank
 {
-    public static class Browser
+    internal class Browser
     {
-        static IWebDriver webDriver = new ChromeDriver();
+        private IWebDriver webDriver = new ChromeDriver();
 
-        public static string Title
+        internal string Title
         {
             get { return webDriver.Title; }
         }
 
-        public static void GoTo(string url)
+        internal void GoTo(string url)
         {
             webDriver.Url = url;
         }
 
-        public static void UserInput(string user)
+        internal void Input(string location, string input)
         {
-            IWebElement username = webDriver.FindElement(By.Id("username"));
-            username.SendKeys(user);
+            IWebElement element = webDriver.FindElement(By.Id(location));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.SendKeys(input);
         }
 
-        public static void PasswordInput(string password)
+        internal void Click(string location)
         {
-            IWebElement pass = webDriver.FindElement(By.Id("password"));
-            pass.SendKeys(password);
-            pass.Submit();
+            IWebElement element = webDriver.FindElement(By.CssSelector(location));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            element.Click();
         }
 
-        public static string ErrorCheck()
+        internal string ErrorCheck(string location)
         {
-            string loginerror = webDriver.FindElement(By.Id("errorDiv1")).Text;
+            string loginerror = webDriver.FindElement(By.Id(location)).Text;
             return loginerror;
         }
 
-        public static void Close()
+        internal void MaximizeWindow()
         {
-            webDriver.Close();
+            webDriver.Manage().Window.Maximize();
+        }
+
+        internal void Close()
+        {
+            webDriver.Dispose();
         }
     }
 }
